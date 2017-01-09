@@ -24,9 +24,7 @@ after_success: |
       make VERSION="$VERSION-$TRAVIS_TAG" release
     fi
 
-    if [ "$VERSION" == "4.2" ]; then
-      make VERSION=latest release
-    fi
+    make VERSION=latest release
   fi
 
 after_failure:
