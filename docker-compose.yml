@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+  mariadb:
+    image: wodby/drupal-mariadb:1.0.0
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user1
+      MYSQL_PASSWORD: 1234567
+
+  adminer:
+    image: wodby/adminer:4.2
+    environment:
+      MYSQL_SERVER: mariadb
+    ports:
+      - "8000:9000"
