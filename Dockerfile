@@ -31,15 +31,15 @@ RUN apk add --update --no-cache \
     echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php7/php.ini
 
 ENV VERSION 4.2.5
-ENV URL https://github.com/vrana/adminer/releases/download/v${VERSION}/adminer-${VERSION}-en.php
+ENV DESIGN nicu
 LABEL version=$VERSION
 
 RUN addgroup -g 82 -S www-data && \
     adduser -u 82 -D -S -G www-data www-data && \
     mkdir -p /var/www/html && \
     chown -R www-data:www-data /var/www && \
-    curl -s -o /var/www/html/index.php -L $URL && \
-    curl -s -o /var/www/html/adminer.css -L https://raw.githubusercontent.com/vrana/adminer/master/designs/nicu/adminer.css
+    curl -s -o /var/www/html/index.php -L https://github.com/vrana/adminer/releases/download/v${VERSION}/adminer-${VERSION}-en.php && \
+    curl -s -o /var/www/html/adminer.css -L https://raw.githubusercontent.com/vrana/adminer/master/designs/${DESIGN}/adminer.css
 
 WORKDIR /var/www/html
 EXPOSE 9000
