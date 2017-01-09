@@ -12,8 +12,7 @@ build:
 	docker build -t $(NS)/$(REPO):$(VERSION) ./
 
 test:
-	docker run --rm --name $(NAME) -i -t $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION) \
-	    node --version | grep -q $(VERSION)
+	docker ps | grep -c "$(NS)/$(REPO):$(VERSION)"
 
 push:
 	docker push $(NS)/$(REPO):$(VERSION)
