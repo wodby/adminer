@@ -12,6 +12,6 @@ services:
   adminer:
     image: wodby/adminer:4.2
     environment:
-      MYSQL_SERVER: mariadb
+      ADMINER_SALT: 41dc974c-15d5-427d-862b-1b50facbcd28
     ports:
       - "8000:9000"
