@@ -1,12 +1,14 @@
 <?php
 
-if (!getenv('ADMINER_SESSID') && getenv('WODBY_INSTANCE_UUID')) {
-  define('ADMINER_SESSID', str_replace('-', '', getenv('WODBY_INSTANCE_UUID')));
+$adminer_ssid = getenv('ADMINER_SESSID');
+
+if (!$adminer_ssid && getenv('WODBY_INSTANCE_UUID')) {
+  $adminer_ssid = str_replace('-', '', getenv('WODBY_INSTANCE_UUID'));
 }
 
-if (!defined("SID") && getenv('ADMINER_SESSID')) {
-  session_name("adminer_sid_" . getenv('ADMINER_SESSID')); // use specific session name to get own namespace
-  $HTTPS = $_SERVER["HTTPS"] && strcasecmp($_SERVER["HTTPS"], "off");
+if (!defined("SID") && $adminer_ssid) {
+  session_name("adminer_sid_$adminer_ssid"); // use specific session name to get own namespace
+  $HTTPS = !empty($_SERVER["HTTPS"]) && strcasecmp($_SERVER["HTTPS"], "off");
   $params = array(0, preg_replace('~\\?.*~', '', $_SERVER["REQUEST_URI"]), "", $HTTPS);
   if (version_compare(PHP_VERSION, '5.2.0') >= 0) {
     $params[] = true; // HttpOnly
