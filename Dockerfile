@@ -5,14 +5,13 @@ RUN apk add --update --no-cache \
         bash \
         curl \
         php7 \
-        php7-fpm \
         php7-opcache \
         php7-session \
+        php7-zlib \
+        php7-mbstring \
         php7-pdo \
         php7-pdo_mysql \
-        php7-zlib \
-        php7-mysqli \
-        php7-mbstring && \
+        php7-mysqli && \
 
     sed -i \
         -e "s/^expose_php.*/expose_php = Off/" \
@@ -38,8 +37,10 @@ RUN addgroup -g 82 -S www-data && \
     adduser -u 82 -D -S -G www-data www-data && \
     mkdir -p /var/www/html && \
     chown -R www-data:www-data /var/www && \
-    curl -s -o /var/www/html/index.php -L https://github.com/vrana/adminer/releases/download/v${VERSION}/adminer-${VERSION}-en.php && \
+    curl -s -o /var/www/html/adminer.php -L https://github.com/vrana/adminer/releases/download/v${VERSION}/adminer-${VERSION}-mysql-en.php && \
     curl -s -o /var/www/html/adminer.css -L https://raw.githubusercontent.com/vrana/adminer/master/designs/${DESIGN}/adminer.css
+
+COPY index.php /var/www/html
 
 WORKDIR /var/www/html
 EXPOSE 9000
