@@ -9,9 +9,18 @@ services:
       MYSQL_USER: user1
       MYSQL_PASSWORD: 1234567
 
-  adminer:
+  adminer1:
     image: wodby/adminer:4.2
     environment:
       ADMINER_SALT: 41dc974c-15d5-427d-862b-1b50facbcd28
+      ADMINER_SESSID: sess1
     ports:
       - "8000:9000"
+
+  adminer2:
+    image: wodby/adminer:4.2
+    environment:
+      ADMINER_SALT: b9b167f9-63ae-4a22-ae0c-003d39d848e3
+      ADMINER_SESSID: sess2
+    ports:
+      - "8001:9000"
