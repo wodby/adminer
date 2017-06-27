@@ -1,4 +1,4 @@
-# Adminer docker container image for Drupal
+# Adminer docker container image
 
 [![Build Status](https://travis-ci.org/wodby/adminer.svg?branch=master)](https://travis-ci.org/wodby/adminer)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/adminer.svg)](https://hub.docker.com/r/wodby/adminer)
