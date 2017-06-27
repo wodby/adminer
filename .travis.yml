@@ -10,7 +10,7 @@ env:
     - VERSION=4.3
     - LATEST=4.3
 
-install:
+script:
   - cd ./$VERSION
   - make && make test
 
