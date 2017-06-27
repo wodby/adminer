@@ -5,8 +5,6 @@ ENV ADMINER_VER 4.3.1
 ENV ADMINER_URL https://github.com/vrana/adminer/releases/download/v${ADMINER_VER}/adminer-${ADMINER_VER}-mysql-en.php
 ENV ADMINER_THEME_URL https://raw.githubusercontent.com/vrana/adminer/master/designs/nicu/adminer.css
 
-LABEL version=$VERSION
-
 RUN apk add --update --no-cache \
         bash \
         curl \
@@ -35,10 +33,7 @@ RUN apk add --update --no-cache \
 
     echo "error_log = \"/proc/self/fd/2\"" | tee -a /etc/php7/php.ini && \
 
-    addgroup -g 82 -S www-data && \
-    adduser -u 82 -D -S -G www-data www-data && \
     mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www && \
     curl -s -o /var/www/html/adminer.php -L ${ADMINER_URL} && \
     curl -s -o /var/www/html/adminer.css -L ${ADMINER_THEME_URL}
 
@@ -47,5 +42,3 @@ COPY index.php /var/www/html
 WORKDIR /var/www/html
 EXPOSE 9000
 CMD ["php7", "-S", "0.0.0.0:9000", "-t", "/var/www/html"]
-
-USER www-data
