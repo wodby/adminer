@@ -20,6 +20,12 @@ if (!defined("SID") && $adminer_ssid) {
 function adminer_object() {
 
   class AdminerSoftware extends Adminer {
+    function credentials() {
+        $host = getenv('ADMINER_DB_HOST');
+        $user = getenv('ADMINER_DB_USER');
+
+        return array($host ? $host : 'localhost', $user ? $user : 'ODBC', '');
+    }
 
     /**
      * Get key used for permanent login
