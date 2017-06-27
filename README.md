@@ -12,3 +12,4 @@
 | ADMINER_SALT    |           | |
 | ADMINER_DB_HOST | localhost | |
 | ADMINER_DB_USER |           | |
+
