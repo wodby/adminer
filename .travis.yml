@@ -4,7 +4,9 @@ services:
   - docker
 
 env:
-  - ADMINER_VER=4.6.3 ADMINER_LANG=en TAGS=4.6,4,latest
+  global:
+    - BASE_IMAGE_STABILITY_TAG=4.4.5
+    - ADMINER_VER=4.6.3 ADMINER_LANG=en TAGS=4.6,4,latest
 
 script:
   - make && make test
