@@ -1,32 +1,13 @@
-language: python
-
-sudo: required
+language: bash
 
 services:
   - docker
 
 env:
-  global:
-    - VERSION=4.3
-    - LATEST=4.3
+  - ADMINER_VER=4.6.3 ADMINER_LANG=en TAGS=4.6,4,latest
 
 script:
-  - cd ./$VERSION
   - make && make test
 
-after_success: |
-  if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([ "$TRAVIS_BRANCH" == "master" ] || [ -n "$TRAVIS_TAG" ]); then
-    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    make release
-
-    if [ -n "$TRAVIS_TAG" ]; then
-      make VERSION="$VERSION-$TRAVIS_TAG" release
-    fi
-
-    if [ "$VERSION" == "$LATEST" ]; then
-      make VERSION=latest release
-    fi
-  fi
-
-after_failure:
-  - make logs
+after_success:
+  - . "${TRAVIS_BUILD_DIR}/release.sh"
