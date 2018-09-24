@@ -13,7 +13,7 @@ ENV ADMINER_VER="${ADMINER_VER}" \
     PHP_UPLOAD_MAX_FILESIZE="512M"
 
 RUN ver="${ADMINER_VER}"; \
-    url="https://github.com/vrana/adminer/releases/download/v${ver}/adminer-${ver}-mysql-${ADMINER_LANG}.php"; \
+    url="https://github.com/vrana/adminer/releases/download/v${ver}/adminer-${ver}-${ADMINER_LANG}.php"; \
     curl -s -o /var/www/html/adminer.php -L "${url}"; \
     theme_url="https://raw.githubusercontent.com/vrana/adminer/master/designs/nicu/adminer.css"; \
     curl -s -o /var/www/html/adminer.css -L "${theme_url}"
