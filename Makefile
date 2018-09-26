@@ -27,11 +27,13 @@ build:
 	docker build -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg ADMINER_VER=$(ADMINER_VER) \
-		--build-arg ADMINER_LANG=$(ADMINER_LANG) \
 	./
 
 test:
-	IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./test.sh
+	cd ./tests/ && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh
+#	@todo automate tests for mariadb/postgres via phantomjs/selenium
+#	cd ./tests/mariadb && IMAGE=$(REPO):$(TAG) ./run.sh
+#	cd ./tests/postgres && IMAGE=$(REPO):$(TAG) ./run.sh
 
 push:
 	docker push $(REPO):$(TAG)

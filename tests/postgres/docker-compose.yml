@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  postgres:
+    image: wodby/postgres
+    environment:
+      POSTGRES_PASSWORD: adminer
+      POSTGRES_DB: adminer
+      POSTGRES_USER: adminer
+
+  adminer:
+    image: $IMAGE
+    depends_on:
+      - postgres
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: pgsql
+      ADMINER_DEFAULT_DB_HOST: postgres
+      ADMINER_DEFAULT_DB_NAME: adminer
+    ports:
+      - 8080:9000

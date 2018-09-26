@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  mariadb:
+    image: wodby/mariadb
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_USER: adminer
+      MYSQL_PASSWORD: adminer
+      MYSQL_DATABASE: adminer
+
+  adminer:
+    image: $IMAGE
+    depends_on:
+      - mariadb
+    environment:
+      ADMINER_DEFAULT_DB_HOST: mariadb
+      ADMINER_DEFAULT_DB_NAME: adminer
+      ADMINER_DESIGN: nette
+      ADMINER_PLUGINS: tables-filter tinymce
+    ports:
+      - 8080:9000
