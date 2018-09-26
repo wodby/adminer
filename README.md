@@ -24,13 +24,13 @@ Plugin loader scripts used from [TimWolla/docker-adminer](https://github.com/Tim
 
 ## Environment Variables
 
-| Variable                    | Default Value | Description                                      |
-| ------------------------    | ------------- | --------------------------------------------     |
-| `ADMINER_DEFAULT_DB_DRIVER` | `server`      | `server` means MySQL, `pgsql` for PostgreSQL     |
-| `ADMINER_DEFAULT_DB_HOST`   |               |                                                  |
-| `ADMINER_DEFAULT_DB_NAME`   |               |                                                  |
-| `ADMINER_DESIGN`            |               | Adminer theme, e.g. `nette`                      |
-| `ADMINER_PLUGINS`           |               | Separated by space, e.g. `tables-filter tinymce` |
+| Variable                    | Default Value | Description                                             |
+| --------------------------- | ------------- | ------------------------------------------------------- |
+| `ADMINER_DEFAULT_DB_DRIVER` | `server`      | `server` is the same as `mysql`, `pgsql` for PostgreSQL |
+| `ADMINER_DEFAULT_DB_HOST`   |               |                                                         |
+| `ADMINER_DEFAULT_DB_NAME`   |               |                                                         |
+| `ADMINER_DESIGN`            |               | Adminer theme, e.g. `nette`                             |
+| `ADMINER_PLUGINS`           |               | Separated by space, e.g. `tables-filter tinymce`        |
 
 See [wodby/php](https://github.com/wodby/php) for all variables
 
