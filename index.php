@@ -19,6 +19,8 @@ namespace docker {
                     $defaultDbHost = $_ENV['ADMINER_DEFAULT_DB_HOST'] ?: '';
                     $defaultDb = $_ENV['ADMINER_DEFAULT_DB_NAME'] ?: '';
 
+                    $defaultDbDriver = $defaultDbDriver == 'mysql' ? 'server' : $defaultDbDriver;
+
                     echo str_replace(
                         [
                             'name="auth[server]" value="" title="hostname[:port]"',
