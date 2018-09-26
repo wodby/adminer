@@ -22,11 +22,11 @@ Supported tags and respective `Dockerfile` links:
 
 ## Environment Variables
 
-| Variable           | Default Value | Description |
-| ------------------ | ------------- | ----------- |
-| `ADMINER_SALT`     |               |             |
-| `ADMINER_DB_HOST`  | `localhost`   |             |
-| `ADMINER_DB_USER`  |               |             |
+| Variable                    | Default Value | Description                                  |
+| ------------------------    | ------------- | -------------------------------------------- |
+| `ADMINER_DEFAULT_DB_DRIVER` | `server`      | `server` means MySQL, `pgsql` for PostgreSQL |
+| `ADMINER_DEFAULT_DB_HOST`   |               |                                              |
+| `ADMINER_DEFAULT_DB_NAME`   |               |                                              |
 
 See [wodby/php](https://github.com/wodby/php) for all variables
 
