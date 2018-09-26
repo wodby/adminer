@@ -14,6 +14,7 @@ services:
     depends_on:
       - mariadb
     environment:
+      ADMINER_DEFAULT_DB_DRIVER: mysql
       ADMINER_DEFAULT_DB_HOST: mariadb
       ADMINER_DEFAULT_DB_NAME: adminer
       ADMINER_DESIGN: nette
