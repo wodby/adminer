@@ -27,7 +27,6 @@ build:
 	docker build -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg ADMINER_VER=$(ADMINER_VER) \
-		--build-arg ADMINER_LANG=$(ADMINER_LANG) \
 	./
 
 test:
