@@ -8,7 +8,8 @@ ENV ADMINER_VER="${ADMINER_VER}" \
     \
     PHP_MAX_EXECUTION_TIME=0 \
     PHP_POST_MAX_SIZE="512M" \
-    PHP_UPLOAD_MAX_FILESIZE="512M"
+    PHP_UPLOAD_MAX_FILESIZE="512M" \
+    PHP_CLI_MEMORY_LIMIT="512M"
 
 RUN set -ex; \
     base_url="https://github.com/vrana/adminer"; \
