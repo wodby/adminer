@@ -31,6 +31,10 @@ Plugin loader scripts used from [TimWolla/docker-adminer](https://github.com/Tim
 | `ADMINER_DEFAULT_DB_NAME`   |               |                                                         |
 | `ADMINER_DESIGN`            |               | Adminer theme, e.g. `nette`                             |
 | `ADMINER_PLUGINS`           |               | Separated by space, e.g. `tables-filter tinymce`        |
+| `PHP_CLI_MEMORY_LIMIT`      | `512M`        |                                                         |
+| `PHP_MAX_EXECUTION_TIME`    | `0`           |                                                         |
+| `PHP_POST_MAX_SIZE`         | `512M`        |                                                         |
+| `PHP_UPLOAD_MAX_FILESIZE`   | `512M`        |                                                         |
 
 See [wodby/php](https://github.com/wodby/php) for all variables
 
