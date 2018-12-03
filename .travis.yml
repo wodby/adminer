@@ -7,6 +7,7 @@ env:
   global:
     - BASE_IMAGE_STABILITY_TAG=4.8.2
     - ADMINER_VER=4.6.3 ADMINER_LANG=en TAGS=4.6,4,latest
+    - ADMINER_VER=4.7.0 ADMINER_LANG=en TAGS=4.7,4,latest
 
 script:
   - make && make test
