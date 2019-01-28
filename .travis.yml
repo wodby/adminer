@@ -4,10 +4,9 @@ services:
   - docker
 
 env:
-  global:
-    - BASE_IMAGE_STABILITY_TAG=4.10.0
-    - ADMINER_VER=4.6.3 ADMINER_LANG=en TAGS=4.6,4,latest
-    - ADMINER_VER=4.7.0 ADMINER_LANG=en TAGS=4.7,4,latest
+  - BASE_IMAGE_STABILITY_TAG=4.10.0
+  - GIT_MERGE_SEPARATOR_DUMMY_ENV_VAR=1
+  - ADMINER_VER=4.7.1 ADMINER_LANG=en TAGS=4.7,4,latest
 
 script:
   - make && make test
