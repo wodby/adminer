@@ -1,14 +1,21 @@
 language: bash
 
 services:
-  - docker
+- docker
 
 env:
-  - GIT_MERGE_SEPARATOR_DUMMY_ENV_VAR=1
-  - ADMINER_VER=4.7.1 ADMINER_LANG=en TAGS=4.7,4,latest
+- GIT_MERGE_SEPARATOR_DUMMY_ENV_VAR=1
+- ADMINER_VER=4.7.1 ADMINER_LANG=en TAGS=4.7,4,latest
 
 script:
-  - make && make test
+- make && make test
 
 after_success:
-  - . "${TRAVIS_BUILD_DIR}/release.sh"
+- . "${TRAVIS_BUILD_DIR}/release.sh"
+
+notifications:
+  email:
+    recipients:
+    - travisci@wodby.com
+    on_success: never
+    on_failure: always
