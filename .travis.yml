@@ -5,7 +5,7 @@ services:
 
 env:
 - BASE_IMAGE_STABILITY_TAG=4.12.9
-- ADMINER_VER=4.7.3 ADMINER_LANG=en TAGS=4.7,4,latest
+- ADMINER_VER=4.7.4 ADMINER_LANG=en TAGS=4.7,4,latest
 
 script:
 - make && make test
