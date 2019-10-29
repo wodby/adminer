@@ -4,7 +4,7 @@ services:
 - docker
 
 env:
-- BASE_IMAGE_STABILITY_TAG=4.12.11
+- BASE_IMAGE_STABILITY_TAG=4.12.12
 - ADMINER_VER=4.7.4 ADMINER_LANG=en TAGS=4.7,4,latest
 
 script:
