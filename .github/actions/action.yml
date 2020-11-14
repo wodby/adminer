@@ -1,0 +1,34 @@
+name: Build
+description: Build adminer image
+inputs:
+  version:
+    description: version
+    required: true
+  tags:
+    description: image tags
+    required: true
+  username:
+    description: docker username
+    required: true
+  password:
+    description: docker password
+    required: true
+  base_image_stability_tag:
+    description: base image stability tag
+    required: true
+runs:
+  using: "composite"
+  steps:
+  - name: Build image
+    env:
+      ADMINER_VER: ${{ inputs.version }}
+      BASE_IMAGE_STABILITY_TAG: ${{ inputs.base_image_stability_tag }}
+      DOCKER_USERNAME: ${{ inputs.username }}
+      DOCKER_PASSWORD: ${{ inputs.password }}
+      TAGS: ${{ inputs.tags }}
+    run: |
+      set -e
+      make
+      make test
+      . $GITHUB_ACTION_PATH/release.sh
+    shell: bash

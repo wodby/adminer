@@ -1,6 +1,6 @@
 # Adminer Docker Container Image
 
-[![Build Status](https://travis-ci.org/wodby/adminer.svg?branch=master)](https://travis-ci.org/wodby/adminer)
+[![Build Status](https://github.com/wodby/adminer/workflows/Build%20docker%20image/badge.svg)](https://github.com/wodby/adminer/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/adminer.svg)](https://hub.docker.com/r/wodby/adminer)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/adminer.svg)](https://hub.docker.com/r/wodby/adminer)
 [![Docker Layers](https://images.microbadger.com/badges/image/wodby/adminer.svg)](https://microbadger.com/images/wodby/adminer)
@@ -11,14 +11,14 @@
 
 Overview:
 
-* All images are based on Alpine Linux
-* Base image: [wodby/php](https://github.com/wodby/php)
-* [TravisCI builds](https://travis-ci.org/wodby/adminer) 
-* [Docker Hub](https://hub.docker.com/r/wodby/adminer)
+- All images based on Alpine Linux
+- Base image: [wodby/php](https://github.com/wodby/php)
+- [GitHub actions builds](https://github.com/wodby/adminer/actions)  
+- [Docker Hub](https://hub.docker.com/r/wodby/adminer)
 
 Supported tags and respective `Dockerfile` links:
 
-* `4.7`, `4`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
+- `4.7`, `4`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
 
 Plugin loader scripts used from [TimWolla/docker-adminer](https://github.com/TimWolla/docker-adminer).
 
