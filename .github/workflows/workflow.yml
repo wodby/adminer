@@ -9,7 +9,7 @@ on:
     - '*'
 
 env:
-  BASE_IMAGE_STABILITY_TAG: 4.18.1
+  BASE_IMAGE_STABILITY_TAG: 4.18.2
 
 jobs:
   adminer-4:
