@@ -18,8 +18,8 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 4.7.9
-        tags: 4.7,4,latest
+        version: 4.8.0
+        tags: 4.8,4,latest
         base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
