@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 4.8.0
+        version: 4.8.1
         tags: 4.8,4,latest
         base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
         username: ${{ secrets.DOCKER_USERNAME }}
