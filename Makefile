@@ -7,7 +7,7 @@ ADMINER_LANG ?= en
 
 TAG ?= $(ADMINER_MINOR_VER)
 
-PHP_VER ?= 7.2
+PHP_VER ?= 7.4
 BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/adminer
