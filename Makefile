@@ -5,6 +5,8 @@ ADMINER_MINOR_VER ?= $(shell echo "${ADMINER_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
 ADMINER_LANG ?= en
 
+PLATFORM ?= linux/amd64
+
 TAG ?= $(ADMINER_MINOR_VER)
 
 PHP_VER ?= 7.4
@@ -19,7 +21,7 @@ ifneq ($(STABILITY_TAG),)
     endif
 endif
 
-.PHONY: build test push shell run start stop logs clean release
+.PHONY: build buildx-build buildx-build-amd64 buildx-push test push shell run start stop logs clean release
 
 default: build
 
@@ -28,6 +30,31 @@ build:
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg ADMINER_VER=$(ADMINER_VER) \
 	./
+
+# --load doesn't work with multiple platforms https://github.com/docker/buildx/issues/59
+# we need to save cache to run tests first.
+buildx-build-amd64:
+	docker buildx build \
+		--platform linux/amd64 \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg ADMINER_VER=$(ADMINER_VER) \
+		--load \
+		-t $(REPO):$(TAG) \
+		./
+
+buildx-build:
+	docker buildx build \
+		--platform $(PLATFORM) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg ADMINER_VER=$(ADMINER_VER) \
+		-t $(REPO):$(TAG) ./
+
+buildx-push:
+	docker buildx build --push \
+		--platform $(PLATFORM) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg ADMINER_VER=$(ADMINER_VER) \
+		-t $(REPO):$(TAG) ./
 
 test:
 #	cd ./tests/ && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh

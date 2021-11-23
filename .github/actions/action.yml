@@ -7,28 +7,22 @@ inputs:
   tags:
     description: image tags
     required: true
-  username:
-    description: docker username
-    required: true
-  password:
-    description: docker password
-    required: true
-  base_image_stability_tag:
-    description: base image stability tag
-    required: true
+  platform:
+    description: docker platform
+    required: false
+    default: linux/amd64
 runs:
   using: "composite"
   steps:
   - name: Build image
     env:
       ADMINER_VER: ${{ inputs.version }}
-      BASE_IMAGE_STABILITY_TAG: ${{ inputs.base_image_stability_tag }}
-      DOCKER_USERNAME: ${{ inputs.username }}
-      DOCKER_PASSWORD: ${{ inputs.password }}
+      PLATFORM: ${{ inputs.platform }}
       TAGS: ${{ inputs.tags }}
     run: |
       set -e
-      make
+      make buildx-build-amd64
       make test
+      make buildx-build
       . $GITHUB_ACTION_PATH/release.sh
     shell: bash

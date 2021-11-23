@@ -9,17 +9,21 @@ on:
     - '*'
 
 env:
-  BASE_IMAGE_STABILITY_TAG: 4.19.1
+  BASE_IMAGE_STABILITY_TAG: 4.26.8
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   adminer-4:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: docker/setup-qemu-action@v1
+      with:
+        platforms: amd64,arm64
+    - uses: docker/setup-buildx-action@v1
     - uses: ./.github/actions
       with:
         version: 4.8.1
         tags: 4.8,4,latest
-        base_image_stability_tag: ${{ env.BASE_IMAGE_STABILITY_TAG }}
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        platform: linux/amd64,linux/arm64

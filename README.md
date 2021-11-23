@@ -22,6 +22,8 @@ Supported tags and respective `Dockerfile` links:
 
 Plugin loader scripts used from [TimWolla/docker-adminer](https://github.com/TimWolla/docker-adminer).
 
+All images built for `linux/amd64` and `linux/arm64`
+
 ## Environment Variables
 
 | Variable                    | Default Value | Description                                             |
