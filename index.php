@@ -15,9 +15,9 @@ namespace docker {
                     $form = ob_get_clean();
 
                     // Set default values via env vars.
-                    $defaultDbDriver = $_ENV['ADMINER_DEFAULT_DB_DRIVER'] ?: 'server';
-                    $defaultDbHost = $_ENV['ADMINER_DEFAULT_DB_HOST'] ?: '';
-                    $defaultDb = $_ENV['ADMINER_DEFAULT_DB_NAME'] ?: '';
+                    $defaultDbDriver = getenv('ADMINER_DEFAULT_DB_DRIVER') ?: 'server';
+                    $defaultDbHost = getenv('ADMINER_DEFAULT_DB_HOST') ?: '';
+                    $defaultDb = getenv('ADMINER_DEFAULT_DB_NAME') ?: '';
 
                     $defaultDbDriver = $defaultDbDriver == 'mysql' ? 'server' : $defaultDbDriver;
 
@@ -54,7 +54,7 @@ namespace docker {
 }
 
 namespace {
-    if (basename($_SERVER['REQUEST_URI']) === 'adminer.css' && is_readable('adminer.css')) {
+    if (basename($_SERVER['DOCUMENT_URI'] ?? $_SERVER['REQUEST_URI']) === 'adminer.css' && is_readable('adminer.css')) {
         header('Content-Type: text/css');
         readfile('adminer.css');
         exit;
