@@ -3,7 +3,6 @@
 [![Build Status](https://github.com/wodby/adminer/workflows/Build%20docker%20image/badge.svg)](https://github.com/wodby/adminer/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/adminer.svg)](https://hub.docker.com/r/wodby/adminer)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/adminer.svg)](https://hub.docker.com/r/wodby/adminer)
-[![Docker Layers](https://images.microbadger.com/badges/image/wodby/adminer.svg)](https://microbadger.com/images/wodby/adminer)
 
 ## Docker Images
 
@@ -27,7 +26,7 @@ All images built for `linux/amd64` and `linux/arm64`
 ## Environment Variables
 
 | Variable                    | Default Value | Description                                             |
-| --------------------------- | ------------- | ------------------------------------------------------- |
+|-----------------------------|---------------|---------------------------------------------------------|
 | `ADMINER_DEFAULT_DB_DRIVER` | `server`      | `server` is the same as `mysql`, `pgsql` for PostgreSQL |
 | `ADMINER_DEFAULT_DB_HOST`   |               |                                                         |
 | `ADMINER_DEFAULT_DB_NAME`   |               |                                                         |
