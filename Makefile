@@ -10,8 +10,7 @@ PLATFORM ?= linux/amd64
 TAG ?= $(ADMINER_MINOR_VER)
 
 PHP_VER ?= 7.4
-ALPINE_VER ?= 3.15
-BASE_IMAGE_TAG = $(PHP_VER)-alpine$(ALPINE_VER)
+BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/adminer
 NAME = adminer-$(ADMINER_MINOR_VER)
