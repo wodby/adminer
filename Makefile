@@ -9,7 +9,7 @@ PLATFORM ?= linux/amd64
 
 TAG ?= $(ADMINER_MINOR_VER)
 
-PHP_VER ?= 7.4
+PHP_VER ?= 8.1
 BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/adminer
