@@ -6,7 +6,7 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags (`wodby/adminer:4.8-X.X.X`) which correspond to [git tags](https://github.com/wodby/adminer/releases). We strongly recommend using images only with stability tags. 
+❗For better reliability we release images with stability tags (`wodby/adminer:4.16-X.X.X`) which correspond to [git tags](https://github.com/wodby/adminer/releases). We strongly recommend using images only with stability tags. 
 
 Overview:
 
@@ -17,7 +17,7 @@ Overview:
 
 Supported tags and respective `Dockerfile` links:
 
-- `4.8`, `4`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
+- `4.16`, `4`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
 
 Plugin loader scripts used from [TimWolla/docker-adminer](https://github.com/TimWolla/docker-adminer).
 
