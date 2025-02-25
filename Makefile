@@ -1,6 +1,6 @@
 -include env_make
 
-ADMINER_VER ?= 4.17.0
+ADMINER_VER ?= 4.17.1
 ADMINER_MINOR_VER ?= $(shell echo "${ADMINER_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
 ADMINER_LANG ?= en
