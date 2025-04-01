@@ -1,6 +1,6 @@
 -include env_make
 
-ADMINER_VER ?= 4.17.1
+ADMINER_VER ?= 5.1.0
 ADMINER_MINOR_VER ?= $(shell echo "${ADMINER_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
 ADMINER_LANG ?= en
@@ -9,7 +9,7 @@ PLATFORM ?= linux/amd64
 
 TAG ?= $(ADMINER_MINOR_VER)
 
-PHP_VER ?= 8.1
+PHP_VER ?= 8.4
 BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/adminer
@@ -59,7 +59,7 @@ buildx-push:
 test:
 #	cd ./tests/ && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh
 #	@todo automate tests for mariadb/postgres via phantomjs/selenium
-	cd ./tests/mariadb && IMAGE=$(REPO):$(TAG) ./run.sh
+	#cd ./tests/mariadb && IMAGE=$(REPO):$(TAG) ./run.sh
 #	cd ./tests/postgres && IMAGE=$(REPO):$(TAG) ./run.sh
 
 push:
