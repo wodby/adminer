@@ -17,7 +17,7 @@ Overview:
 
 Supported tags and respective `Dockerfile` links:
 
-- `5.1`, `5`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
+- `5.2`, `5`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
 
 Plugin loader scripts used from [TimWolla/docker-adminer](https://github.com/TimWolla/docker-adminer).
 
