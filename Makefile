@@ -57,7 +57,7 @@ buildx-push:
 		-t $(REPO):$(TAG) ./
 
 test:
-#	cd ./tests/ && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh
+	cd ./tests/ && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh
 #	@todo automate tests for mariadb/postgres via phantomjs/selenium
 	#cd ./tests/mariadb && IMAGE=$(REPO):$(TAG) ./run.sh
 #	cd ./tests/postgres && IMAGE=$(REPO):$(TAG) ./run.sh

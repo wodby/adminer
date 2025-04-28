@@ -1,18 +1,18 @@
 <?php
 
 namespace docker {
-    function adminer_object()
-    {
-        require_once('plugins/plugin.php');
+    function adminer_object() {
+        /**
+         * Prefills the “Server” field with the ADMINER_DEFAULT_SERVER environment variable.
+         */
+        final class DefaultServerPlugin extends \Adminer\Plugin {
+            public function __construct(
+                private \Adminer\Adminer $adminer
+            ) { }
 
-        class Adminer extends \AdminerPlugin
-        {
-            function _callParent($function, $args)
-            {
-                if ($function === 'loginForm') {
-                    ob_start();
-                    $return = \Adminer::loginForm();
-                    $form = ob_get_clean();
+            public function loginFormField(...$args) {
+                return (function (...$args) {
+                    $field = $this->loginFormField(...$args);
 
                     // Set default values via env vars.
                     $defaultDbDriver = getenv('ADMINER_DEFAULT_DB_DRIVER') ?: 'server';
@@ -34,13 +34,9 @@ namespace docker {
                             '>MySQL',
                             'name="auth[db]" value="' . $defaultDb . '"'
                         ],
-                        $form
+                        $field,
                     );
-
-                    return $return;
-                }
-
-                return parent::_callParent($function, $args);
+                })->call($this->adminer, ...$args);
             }
         }
 
@@ -49,7 +45,18 @@ namespace docker {
             $plugins[] = require($plugin);
         }
 
-        return new Adminer($plugins);
+        $adminer = new \Adminer\Plugins($plugins);
+
+        (function () {
+            $last = &$this->hooks['loginFormField'][\array_key_last($this->hooks['loginFormField'])];
+            if ($last instanceof \Adminer\Adminer) {
+                $defaultServerPlugin = new DefaultServerPlugin($last);
+                $this->plugins[] = $defaultServerPlugin;
+                $last = $defaultServerPlugin;
+            }
+        })->call($adminer);
+
+        return $adminer;
     }
 }
 
@@ -60,8 +67,7 @@ namespace {
         exit;
     }
 
-    function adminer_object()
-    {
+    function adminer_object() {
         return \docker\adminer_object();
     }
 
