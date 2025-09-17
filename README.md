@@ -10,8 +10,7 @@
 
 Overview:
 
-- All images based on Alpine Linux
-- Base image: [wodby/php](https://github.com/wodby/php)
+- Base image: [php:8.4-apache](https://hub.docker.com/_/php)
 - [GitHub actions builds](https://github.com/wodby/adminer/actions)  
 - [Docker Hub](https://hub.docker.com/r/wodby/adminer)
 

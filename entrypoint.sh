@@ -24,4 +24,4 @@ fi
 
 touch .adminer-init || true
 
-exec /docker-entrypoint.sh "${@}"
+exec docker-php-entrypoint "${@}"

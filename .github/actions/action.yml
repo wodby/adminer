@@ -1,28 +1,23 @@
-name: Build
-description: Build adminer image
+name: push
+description: combine multi-arch image and push
 inputs:
   version:
     description: version
     required: true
-  tags:
-    description: image tags
-    required: true
-  platform:
-    description: docker platform
+  latest:
+    description: if tag latest
     required: false
-    default: linux/amd64
+  latest_major:
+    description: if tag latest major version
+    required: false
 runs:
   using: "composite"
   steps:
-  - name: Build image
-    env:
-      ADMINER_VER: ${{ inputs.version }}
-      PLATFORM: ${{ inputs.platform }}
-      TAGS: ${{ inputs.tags }}
-    run: |
-      set -e
-      make buildx-build-amd64
-      make test
-      make buildx-build
-      . $GITHUB_ACTION_PATH/release.sh
-    shell: bash
+    - name: Build image
+      env:
+        ADMINER_VER: ${{ inputs.version }}
+        LATEST: ${{ inputs.latest }}
+        LATEST_MAJOR: ${{ inputs.latest_major }}
+      run: |
+        . $GITHUB_ACTION_PATH/release.sh
+      shell: bash

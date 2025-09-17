@@ -1,6 +1,4 @@
-ARG BASE_IMAGE_TAG
-
-FROM wodby/php:${BASE_IMAGE_TAG}
+FROM php:8.4-apache
 
 ARG ADMINER_VER
 
@@ -24,8 +22,8 @@ COPY --chown=wodby:wodby index.php /var/www/html
 
 COPY entrypoint.sh /
 
-EXPOSE 9000
+EXPOSE 80
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-CMD ["php", "-S", "0.0.0.0:9000", "-t", "/var/www/html"]
+CMD [ "apache2-foreground" ]
