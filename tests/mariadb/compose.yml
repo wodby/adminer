@@ -18,4 +18,4 @@ services:
       ADMINER_DESIGN: nette
       ADMINER_PLUGINS: tables-filter tinymce
     ports:
-      - 8080:9000
+      - 8080:80

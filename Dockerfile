@@ -10,13 +10,21 @@ ENV ADMINER_VER="${ADMINER_VER}" \
     PHP_CLI_MEMORY_LIMIT="512M"
 
 RUN set -ex; \
+    apt-get update && apt-get install -y --no-install-recommends \
+      postgresql-client \
+      postgresql-server-dev-all; \
+    docker-php-ext-install mysqli pgsql pdo_mysql pdo_pgsql; \
     base_url="https://github.com/vrana/adminer"; \
     curl -sSL "${base_url}/releases/download/v${ADMINER_VER}/adminer-${ADMINER_VER}.php" -o adminer.php; \
     curl -sSL "${base_url}/archive/v${ADMINER_VER}.tar.gz" -o source.tar.gz; \
     curl -sSL "https://github.com/TimWolla/docker-adminer/raw/master/5/plugin-loader.php" -o plugin-loader.php; \
     tar xzf source.tar.gz --strip-components=1 "adminer-${ADMINER_VER}/designs/" "adminer-${ADMINER_VER}/plugins/"; \
     mkdir -p /var/www/html/plugins-enabled; \
-    rm source.tar.gz
+    apt-get purge -y --auto-remove \
+      postgresql-server-dev-all; \
+    rm -rf \
+      /var/lib/apt/lists/* \
+      source.tar.gz
 
 COPY --chown=wodby:wodby index.php /var/www/html
 

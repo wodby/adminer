@@ -15,4 +15,4 @@ services:
       ADMINER_DEFAULT_DB_HOST: postgres
       ADMINER_DEFAULT_DB_NAME: adminer
     ports:
-      - 8080:9000
+      - 8080:80
