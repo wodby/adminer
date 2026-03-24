@@ -23,18 +23,18 @@ namespace docker {
 
                     echo str_replace(
                         [
-                            'name="auth[server]" value="" title="hostname[:port]"',
+                            'name="auth[server]" value=""',
                             'value="' . $defaultDbDriver . '"',
                             'selected="">MySQL',
                             'name="auth[db]" value=""'
                         ],
                         [
-                            'name="auth[server]" value="' . $defaultDbHost . '" title="hostname[:port]"',
+                            'name="auth[server]" value="' . $defaultDbHost . '"',
                             'value="' . $defaultDbDriver . '" selected="selected"',
                             '>MySQL',
-                            'name="auth[db]" value="' . $defaultDb . '"'
+                            'name="auth[db]" value="' . $defaultDb . '" '
                         ],
-                        $field,
+                        $field
                     );
                 })->call($this->adminer, ...$args);
             }
