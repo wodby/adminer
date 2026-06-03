@@ -2,14 +2,14 @@
 
 set -e
 
+cd /var/www/html
+
 if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
 if [[ -n "${ADMINER_DESIGN}" ]]; then
-	if [[  ! -e .adminer-init  ]]; then
-		ln -sf "designs/${ADMINER_DESIGN}/adminer.css" .
-	fi
+    install -m 0644 "designs/${ADMINER_DESIGN}/adminer.css" adminer.css
 fi
 
 if [[ -n "${ADMINER_PLUGINS}" ]]; then
@@ -21,7 +21,5 @@ if [[ -n "${ADMINER_PLUGINS}" ]]; then
         number=$(($number+1))
     done
 fi
-
-touch .adminer-init || true
 
 exec docker-php-entrypoint "${@}"
