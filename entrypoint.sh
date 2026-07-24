@@ -9,7 +9,20 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 if [[ -n "${ADMINER_DESIGN}" ]]; then
-    install -m 0644 "designs/${ADMINER_DESIGN}/adminer.css" adminer.css
+    design_path="designs/${ADMINER_DESIGN}"
+    stylesheet_found=0
+
+    for stylesheet in adminer.css adminer-dark.css; do
+        if [[ -f "${design_path}/${stylesheet}" ]]; then
+            install -m 0644 "${design_path}/${stylesheet}" "${stylesheet}"
+            stylesheet_found=1
+        fi
+    done
+
+    if [[ "${stylesheet_found}" -eq 0 ]]; then
+        echo "No supported stylesheets found for Adminer design '${ADMINER_DESIGN}'" >&2
+        exit 1
+    fi
 fi
 
 if [[ -n "${ADMINER_PLUGINS}" ]]; then
