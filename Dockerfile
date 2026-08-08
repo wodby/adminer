@@ -17,7 +17,7 @@ RUN set -ex; \
     base_url="https://github.com/vrana/adminer"; \
     curl -sSL "${base_url}/releases/download/v${ADMINER_VER}/adminer-${ADMINER_VER}.php" -o adminer.php; \
     curl -sSL "${base_url}/archive/v${ADMINER_VER}.tar.gz" -o source.tar.gz; \
-    curl -sSL "https://github.com/TimWolla/docker-adminer/raw/master/5/plugin-loader.php" -o plugin-loader.php; \
+    curl -sSL "https://github.com/TimWolla/docker-adminer/raw/98b870868bdd5adb179e79aa9b11cc01086ec1db/5/plugin-loader.php" -o plugin-loader.php; \
     tar xzf source.tar.gz --strip-components=1 "adminer-${ADMINER_VER}/designs/" "adminer-${ADMINER_VER}/plugins/"; \
     mkdir -p /var/www/html/plugins-enabled; \
     apt-get purge -y --auto-remove \

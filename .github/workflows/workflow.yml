@@ -9,7 +9,7 @@ on:
     - '*'
 
 env:
-  ADMINER5: '5.5.1'
+  ADMINER6: '6.0.0'
 
 jobs:
   adminer-build:
@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: build and push
         env:
-          ADMINER_VER: ${{ env.ADMINER5 }}
+          ADMINER_VER: ${{ env.ADMINER6 }}
           ARCH: ${{ matrix.arch }}
         run: |
           make
@@ -50,6 +50,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - uses: ./.github/actions
         with:
-          version: ${{ env.ADMINER5 }}
+          version: ${{ env.ADMINER6 }}
           latest: true
           latest_major: true

@@ -6,7 +6,7 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags (`wodby/adminer:5-X.X.X`) which correspond to [git tags](https://github.com/wodby/adminer/releases). We strongly recommend using images only with stability tags. 
+❗For better reliability we release images with stability tags (`wodby/adminer:6-X.X.X`) which correspond to [git tags](https://github.com/wodby/adminer/releases). We strongly recommend using images only with stability tags.
 
 Overview:
 
@@ -16,7 +16,7 @@ Overview:
 
 Supported tags and respective `Dockerfile` links:
 
-- `5.5`, `5`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
+- `6.0`, `6`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
 
 Plugin loader scripts used from [TimWolla/docker-adminer](https://github.com/TimWolla/docker-adminer).
 
@@ -30,7 +30,7 @@ All images built for `linux/amd64` and `linux/arm64`
 | `ADMINER_DEFAULT_DB_HOST`   |               |                                                         |
 | `ADMINER_DEFAULT_DB_NAME`   |               |                                                         |
 | `ADMINER_DESIGN`            |               | Adminer theme, e.g. `nette`                             |
-| `ADMINER_PLUGINS`           |               | Separated by space, e.g. `tables-filter tinymce`        |
+| `ADMINER_PLUGINS`           |               | Separated by space, e.g. `tables-filter`                |
 | `PHP_CLI_MEMORY_LIMIT`      | `512M`        |                                                         |
 | `PHP_MAX_EXECUTION_TIME`    | `0`           |                                                         |
 | `PHP_POST_MAX_SIZE`         | `512M`        |                                                         |
