@@ -9,7 +9,7 @@ on:
     - '*'
 
 env:
-  ADMINER6: '6.0.0'
+  ADMINER6: '6.0.1'
 
 jobs:
   adminer-build:
