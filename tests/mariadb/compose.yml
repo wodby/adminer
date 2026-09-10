@@ -16,6 +16,6 @@ services:
       ADMINER_DEFAULT_DB_HOST: mariadb
       ADMINER_DEFAULT_DB_NAME: adminer
       ADMINER_DESIGN: nette
-      ADMINER_PLUGINS: tables-filter tinymce
+      ADMINER_PLUGINS: tables-filter edit-textarea
     ports:
       - 8080:80

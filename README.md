@@ -38,6 +38,21 @@ All images built for `linux/amd64` and `linux/arm64`
 
 See [wodby/php](https://github.com/wodby/php) for all variables
 
+## Upgrading to Adminer 6
+
+Review `ADMINER_PLUGINS` when upgrading from Adminer 5. Adminer 6 removed the
+`tinymce`, `edit-calendar`, `json-column`, `pretty-json-column`, `translation`,
+`email-table`, `dump-php`, and `master-slave` plugins
+([upstream change](https://github.com/vrana/adminer/commit/7730d2e6dfc3831a8508e362bc8948dd0cd1bce2)).
+Remove these names from your configuration; unavailable plugins stop container startup.
+Removing `tinymce` also removes its rich-text editing functionality.
+
+Space-separated plugin lists are still supported. For example:
+
+```yaml
+ADMINER_PLUGINS: tables-filter edit-textarea
+```
+
 ## Deployment
 
 Deploy Adminer to your own server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
