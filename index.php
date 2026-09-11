@@ -3,7 +3,7 @@
 namespace docker {
     function adminer_object() {
         /**
-         * Prefills the “Server” field with the ADMINER_DEFAULT_SERVER environment variable.
+         * Prefills login fields with the configured database defaults.
          */
         final class DefaultServerPlugin extends \Adminer\Plugin {
             public function __construct(
@@ -21,18 +21,31 @@ namespace docker {
 
                     $defaultDbDriver = $defaultDbDriver == 'mysql' ? 'server' : $defaultDbDriver;
 
+                    // Adminer versions use different attribute quotes. Only fill empty values,
+                    // and escape defaults for either quote style without changing explicit input.
+                    $default = match ($args[0]) {
+                        'server' => $defaultDbHost,
+                        'db' => $defaultDb,
+                        default => '',
+                    };
+                    if ($default !== '') {
+                        $field = preg_replace_callback(
+                            '~\bvalue=([\"\'])\\1~',
+                            static fn ($match) => 'value=' . $match[1]
+                                . htmlspecialchars($default, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
+                                . $match[1],
+                            $field
+                        );
+                    }
+
                     echo str_replace(
                         [
-                            'name="auth[server]" value=""',
                             'value="' . $defaultDbDriver . '"',
-                            'selected="">MySQL',
-                            'name="auth[db]" value=""'
+                            'selected="">MySQL'
                         ],
                         [
-                            'name="auth[server]" value="' . $defaultDbHost . '"',
                             'value="' . $defaultDbDriver . '" selected="selected"',
-                            '>MySQL',
-                            'name="auth[db]" value="' . $defaultDb . '" '
+                            '>MySQL'
                         ],
                         $field
                     );

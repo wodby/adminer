@@ -52,3 +52,18 @@ for plugin in tinymce nonexistent-plugin; do
     fi
     echo "OK"
 done
+
+# Check actual login HTML, including both attribute quote styles used by Adminer.
+for defaults in plain escaped empty; do
+    case "${defaults}" in
+        plain) host='mariadb'; database='adminer' ;;
+        escaped) host="db'\"&<host>"; database="db'\"&<name>" ;;
+        empty) host=''; database='' ;;
+    esac
+    container="${NAME}-defaults-${defaults}"
+    cid="$(docker run -d -e ADMINER_DEFAULT_DB_HOST="${host}" -e ADMINER_DEFAULT_DB_NAME="${database}" --name "${container}" "${IMAGE}")"
+    cids+=("${cid}")
+    echo -n "Checking ${defaults} login defaults and explicit values... "
+    docker run --rm --link "${container}:adminer" "${IMAGE}" curl -fsS --retry 10 --retry-connrefused --retry-delay 1 -o /dev/null http://adminer/
+    docker run --rm -i --link "${container}:adminer" -e ADMINER_DEFAULT_DB_HOST="${host}" -e ADMINER_DEFAULT_DB_NAME="${database}" "${IMAGE}" php < login-form.php
+done
