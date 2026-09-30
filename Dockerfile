@@ -6,6 +6,7 @@ ENV ADMINER_VER="${ADMINER_VER}" \
     \
     PHP_MAX_EXECUTION_TIME=0 \
     PHP_POST_MAX_SIZE="512M" \
+    PHP_MEMORY_LIMIT="512M" \
     PHP_UPLOAD_MAX_FILESIZE="512M" \
     PHP_CLI_MEMORY_LIMIT="512M"
 
@@ -25,6 +26,13 @@ RUN set -ex; \
     rm -rf \
       /var/lib/apt/lists/* \
       source.tar.gz
+
+RUN { \
+    echo "max_execution_time = ${PHP_MAX_EXECUTION_TIME}"; \
+    echo 'memory_limit = $${PHP_MEMORY_LIMIT}'; \
+    echo "post_max_size = ${PHP_POST_MAX_SIZE}"; \
+    echo "upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}"; \
+    } > "${PHP_INI_DIR}/conf.d/zz-adminer.ini"
 
 COPY --chown=wodby:wodby index.php /var/www/html
 
