@@ -67,3 +67,32 @@ for defaults in plain escaped empty; do
     docker run --rm --link "${container}:adminer" "${IMAGE}" curl -fsS --retry 10 --retry-connrefused --retry-delay 1 -o /dev/null http://adminer/
     docker run --rm -i --link "${container}:adminer" -e ADMINER_DEFAULT_DB_HOST="${host}" -e ADMINER_DEFAULT_DB_NAME="${database}" "${IMAGE}" php < login-form.php
 done
+
+# PHP limits must follow the container environment. Check them through Apache because
+# the CLI always reports max_execution_time as 0.
+php_limits='<?php foreach (["max_execution_time", "memory_limit", "post_max_size", "upload_max_filesize"] as $name) { echo ini_get($name), " "; }'
+for limits in default overridden; do
+    case "${limits}" in
+        default) env=(); expected="0 512M 512M 512M " ;;
+        overridden)
+            env=(-e PHP_MAX_EXECUTION_TIME=30 -e PHP_MEMORY_LIMIT=256M -e PHP_POST_MAX_SIZE=64M -e PHP_UPLOAD_MAX_FILESIZE=32M)
+            expected="30 256M 64M 32M "
+            ;;
+    esac
+    container="${NAME}-limits-${limits}"
+    cid="$(docker run -d "${env[@]}" --name "${container}" "${IMAGE}")"
+    cids+=("${cid}")
+    echo -n "Checking ${limits} PHP limits... "
+    docker exec -i "${container}" sh -c 'cat > limits.php' <<< "${php_limits}"
+    output="$(docker exec "${container}" curl -fsS --retry 10 --retry-connrefused --retry-delay 1 http://localhost/limits.php)"
+    if [[ "${output}" != "${expected}" ]]; then
+        echo "Expected '${expected}', got '${output}'" >&2
+        exit 1
+    fi
+    # A malformed ini value is reported as a startup warning.
+    if docker run --rm "${env[@]}" "${IMAGE}" php -v 2>&1 | grep -q Warning; then
+        echo "PHP reported startup warnings" >&2
+        exit 1
+    fi
+    echo "OK"
+done
