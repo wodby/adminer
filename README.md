@@ -37,12 +37,10 @@ All images built for `linux/amd64` and `linux/arm64`
 | `ADMINER_DEFAULT_DB_NAME`   |               |                                                         |
 | `ADMINER_DESIGN`            |               | Adminer theme, e.g. `nette`                             |
 | `ADMINER_PLUGINS`           |               | Separated by space, e.g. `tables-filter`                |
-| `PHP_CLI_MEMORY_LIMIT`      | `512M`        |                                                         |
 | `PHP_MAX_EXECUTION_TIME`    | `0`           |                                                         |
+| `PHP_MEMORY_LIMIT`          | `512M`        |                                                         |
 | `PHP_POST_MAX_SIZE`         | `512M`        |                                                         |
 | `PHP_UPLOAD_MAX_FILESIZE`   | `512M`        |                                                         |
-
-See [wodby/php](https://github.com/wodby/php) for all variables
 
 ## Upgrading to Adminer 6
 

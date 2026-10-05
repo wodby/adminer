@@ -5,9 +5,9 @@ ARG ADMINER_VER
 ENV ADMINER_VER="${ADMINER_VER}" \
     \
     PHP_MAX_EXECUTION_TIME=0 \
+    PHP_MEMORY_LIMIT="512M" \
     PHP_POST_MAX_SIZE="512M" \
-    PHP_UPLOAD_MAX_FILESIZE="512M" \
-    PHP_CLI_MEMORY_LIMIT="512M"
+    PHP_UPLOAD_MAX_FILESIZE="512M"
 
 RUN set -ex; \
     apt-get update && apt-get install -y --no-install-recommends \
@@ -26,7 +26,9 @@ RUN set -ex; \
       /var/lib/apt/lists/* \
       source.tar.gz
 
-COPY --chown=wodby:wodby index.php /var/www/html
+COPY adminer.ini "${PHP_INI_DIR}/conf.d/zz-adminer.ini"
+
+COPY index.php /var/www/html
 
 COPY entrypoint.sh /
 
