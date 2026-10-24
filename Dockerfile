@@ -10,7 +10,8 @@ ENV ADMINER_VER="${ADMINER_VER}" \
     PHP_UPLOAD_MAX_FILESIZE="512M"
 
 RUN set -ex; \
-    apt-get update && apt-get install -y --no-install-recommends \
+    apt-get update && \
+    apt-get install -y --no-install-recommends --only-upgrade libbrotli1 && apt-get install -y --no-install-recommends \
       postgresql-client \
       postgresql-server-dev-all; \
     docker-php-ext-install mysqli pgsql pdo_mysql pdo_pgsql; \
