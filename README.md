@@ -22,7 +22,7 @@ Overview:
 
 Supported tags and respective `Dockerfile` links:
 
-- `6.1`, `6`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
+- `6.2`, `6`, `latest` [_(Dockerfile)_](https://github.com/wodby/adminer/tree/master/Dockerfile)
 
 Plugin loader scripts used from [TimWolla/docker-adminer](https://github.com/TimWolla/docker-adminer).
 
