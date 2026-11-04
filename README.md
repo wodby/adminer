@@ -16,7 +16,8 @@ Previously published image tags remain available.
 
 Overview:
 
-- Base image: [php:8.4-apache](https://hub.docker.com/_/php)
+- Base image: [wodby/php](https://github.com/wodby/php) `8.4-apache` (Alpine Linux), pinned by digest: Apache in front
+  of PHP-FPM in one container
 - [GitHub actions builds](https://github.com/wodby/adminer/actions)  
 - [Docker Hub](https://hub.docker.com/r/wodby/adminer)
 
@@ -42,6 +43,11 @@ All images built for `linux/amd64` and `linux/arm64`
 | `PHP_POST_MAX_SIZE`         | `512M`        |                                                         |
 | `PHP_UPLOAD_MAX_FILESIZE`   | `512M`        |                                                         |
 
+The variables of [wodby/php](https://github.com/wodby/php), including its `-apache` variant, apply as well.
+`APACHE_FCGI_PROXY_TIMEOUT` is `86400`, so long imports and exports run as long as PHP allows.
+
+The container starts as root and Apache and PHP-FPM serve requests as `www-data`, so it also runs where privilege
+escalation is disallowed.
 ## Upgrading to Adminer 6
 
 Review `ADMINER_PLUGINS` when upgrading from Adminer 5. Adminer 6 removed the
@@ -56,6 +62,12 @@ Space-separated plugin lists are still supported. For example:
 ```yaml
 ADMINER_PLUGINS: tables-filter edit-textarea
 ```
+
+## Upgrading from images before the wodby/php base
+
+Images built on the official Debian-based `php:8.4-apache` image ran Apache with PHP as an Apache module. The image now
+runs Apache and PHP-FPM on Alpine Linux. Port 80 and the variables above are unchanged. Apache configuration mounted
+into Debian's `/etc/apache2/sites-enabled` or `/etc/apache2/conf-enabled` must move to `/etc/apache2/conf.d/*.conf`.
 
 ## Deployment
 

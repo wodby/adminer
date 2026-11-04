@@ -6,4 +6,4 @@ tests
 LICENSE.md
 Makefile
 README.md
-release.sh
+release.shbase-images.mk
