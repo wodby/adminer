@@ -24,6 +24,22 @@ for design_and_stylesheet in "nette adminer.css" "dracula adminer-dark.css"; do
     echo "OK"
 done
 
+# The Kubernetes chart disallows privilege escalation, which blocks sudo.
+container="${NAME}-no-new-privileges"
+cid="$(docker run -d -e DEBUG --security-opt no-new-privileges --name "${container}" "${IMAGE}")"
+cids+=("${cid}")
+echo -n "Checking adminer homepage without privilege escalation... "
+docker run --rm -i --link "${container}:adminer" "${IMAGE}" sh -ec "curl -fsS --retry 10 --retry-connrefused --retry-delay 1 'adminer:80' | grep -q Adminer"
+echo "OK"
+
+echo -n "Checking that Apache and PHP-FPM serve as unprivileged users... "
+users="$(docker exec "${container}" ps -o user,args | grep -E 'httpd -DFOREGROUND|php-fpm: pool' | grep -v '^root' | awk '{print $1}' | sort -u | tr '\n' ' ')"
+if [[ "${users}" != "www-data " ]]; then
+    echo "Unexpected users: ${users}" >&2
+    exit 1
+fi
+echo "OK"
+
 # Exercise plugin generation and HTTP startup with more than one supported plugin.
 container="${NAME}-plugins"
 cid="$(docker run -d -e DEBUG -e ADMINER_PLUGINS="tables-filter edit-textarea" --name "${container}" "${IMAGE}")"

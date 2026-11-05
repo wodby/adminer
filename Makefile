@@ -5,6 +5,10 @@ ADMINER_MINOR_VER ?= $(shell echo "${ADMINER_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
 ADMINER_LANG ?= en
 
+# Adminer runs on the Apache variant of wodby/php, at one PHP version.
+PHP_VER ?= 8.4
+BASE_IMAGE_REVISION ?=
+
 PLATFORM ?= linux/arm64
 
 TAG ?= $(ADMINER_MINOR_VER)
@@ -18,22 +22,29 @@ endif
 
 .PHONY: build buildx-build buildx-push test push shell run start stop logs clean release
 
+# Resolve the same pinned base image for every local and CI build target.
+include base-images.mk
+BASE_IMAGE_TAG = $(PHP_VER)-apache$(if $(BASE_IMAGE_REVISION),-$(BASE_IMAGE_REVISION))
+
 default: build
 
 build:
 	docker build -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE="$(BASE_IMAGE)" \
 		--build-arg ADMINER_VER=$(ADMINER_VER) \
 	./
 
 buildx-build:
 	docker buildx build \
 		--platform $(PLATFORM) \
+		--build-arg BASE_IMAGE="$(BASE_IMAGE)" \
 		--build-arg ADMINER_VER=$(ADMINER_VER) \
 		-t $(REPO):$(TAG) ./
 
 buildx-push:
 	docker buildx build --push \
 		--platform $(PLATFORM) \
+		--build-arg BASE_IMAGE="$(BASE_IMAGE)" \
 		--build-arg ADMINER_VER=$(ADMINER_VER) \
 		-t $(REPO):$(TAG) ./
 

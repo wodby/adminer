@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-set -e
+# Sourced by the wodby/php entrypoint before the main command. Installs the
+# design and generates the plugins chosen in ADMINER_DESIGN and ADMINER_PLUGINS.
+# An unknown design or plugin stops the container before it serves requests.
 
 cd /var/www/html
-
-if [[ -n "${DEBUG}" ]]; then
-    set -x
-fi
 
 if [[ -n "${ADMINER_DESIGN}" ]]; then
     design_path="designs/${ADMINER_DESIGN}"
@@ -40,8 +38,6 @@ if [[ -n "${ADMINER_PLUGINS}" ]]; then
         fi
 
         php plugin-loader.php "${plugin}" > "plugins-enabled/$(printf "%03d" "${number}")-${plugin}.php"
-        number=$(($number+1))
+        number=$((number + 1))
     done
 fi
-
-exec docker-php-entrypoint "${@}"
