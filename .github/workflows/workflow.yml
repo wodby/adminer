@@ -12,7 +12,7 @@ on:
 env:
   ADMINER6: '6.3.0'
   # The revision of the wodby/php Apache variant the image is built on.
-  BASE_IMAGE_REVISION: r13
+  BASE_IMAGE_REVISION: r14
 
 jobs:
   adminer-build:
